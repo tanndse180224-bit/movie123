@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Movie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: white;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        iframe {
+            width: 80%;
+            height: 500px;
+            border-radius: 8px;
+            border: none;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${movie.movieName}"></h1>
+    <iframe th:src="${movie.movieURL}" allowfullscreen></iframe>
+    <br>
+    <!-- Sử dụng Thymeleaf để back về trang detail -->
+    <a th:href="@{/movies/getmoviebyid(id=${movie.id})}" class="back-button">Back to Movie Detail</a>
+</div>
+</body>
+</html>

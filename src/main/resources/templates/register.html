@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #1a1a1a;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #262626;
+            color: white;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: 2px solid #4CAF50;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #45a049, #4CAF50);
+            transform: scale(1.05);
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #00aaff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0088cc;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Register</h1>
+    <p th:if="${error}" th:text="'ERROR: ' + ${error}" class="error"></p>
+
+    <form action="/register" method="post">
+        <p>
+            <label for="userName">Username:</label>
+            <input type="text" id="userName" name="userName"
+                   th:value="${userName}" required>
+        <p th:if="${error1}" th:text="'ERROR: ' + ${error1}" class="error"></p>
+        </p>
+        <p>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName"
+                   th:value="${fullName}" required>
+        </p>
+        <p>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email"
+                   th:value="${email}" required>
+        <p th:if="${error2}" th:text="'ERROR: ' + ${error2}" class="error"></p>
+        </p>
+        <p>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"
+                   th:value="${password}" required>
+        </p>
+        <p>
+            <button type="submit">Register</button>
+        </p>
+        <p><a href="/login">Quay lại trang đăng nhập</a></p>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Movies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #ff4500;
+            text-transform: uppercase;
+        }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .movie-card {
+            display: block;
+            background: #252525;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.8);
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .movie-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #ff4500;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #e63e00;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Your Favorite Movies</h2>
+
+    <div class="movie-grid">
+        <th:block th:each="movie : ${movies}">
+            <a th:href="@{/movies/getmoviebyid(id=${movie.id})}" class="movie-card">
+                <img th:src="${movie.thumbnailURL}" alt="Movie Thumbnail">
+                <div class="movie-title" th:text="${movie.movieName}"></div>
+            </a>
+        </th:block>
+    </div>
+
+    <br>
+    <a href="/movies/home" class="back-link">⬅ Back to Movies List</a>
+</div>
+
+</body>
+</html>

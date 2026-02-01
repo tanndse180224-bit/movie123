@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      width: 320px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: white;
+    }
+
+    input:focus {
+      outline: 2px solid #4CAF50;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .register-btn {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      background-color: #007BFF;
+    }
+
+    .register-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .error {
+      color: red;
+    }
+
+    .success {
+      color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>LOGIN</h1>
+  <p th:if="${error}" th:text="'ERROR: ' + ${error}" class="error"></p>
+  <p th:if="${success}" th:text="' ' + ${success}" class="success"></p>
+
+  <form action="/login" method="post">
+    <p>
+      <label for="emailOrUsername">Username or Email:</label>
+      <input type="text" id="emailOrUsername" name="emailOrUsername"
+             th:value="${emailOrUsername}" required>
+    </p>
+    <p>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </p>
+    <p>
+      <button type="submit">Login</button>
+    </p>
+  </form>
+  <a href="/register">
+    <button type="button" class="register-btn">Register</button>
+  </a>
+</div>
+</body>
+</html>

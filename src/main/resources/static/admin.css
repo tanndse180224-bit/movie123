@@ -1,0 +1,93 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Toàn bộ trang */
+body {
+    background-color: #121212;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Khung quản lý */
+.container {
+    width: 90%;
+    max-width: 900px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Tiêu đề */
+h2 {
+    margin-bottom: 20px;
+    color: #E50914;
+}
+
+/* Bảng danh sách user */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+thead {
+    background: #333;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #444;
+    text-align: center;
+}
+
+th {
+    background: #222;
+}
+
+/* Nút */
+.btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.edit {
+    background: #007bff;
+}
+
+.edit:hover {
+    background: #0056b3;
+}
+
+.delete {
+    background: #E50914;
+}
+
+.delete:hover {
+    background: #b20710;
+}
+
+.add-user {
+    display: inline-block;
+    background: #28a745;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.add-user:hover {
+    background: #1e7e34;
+}

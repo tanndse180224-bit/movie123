@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff4500;
+            text-transform: uppercase;
+        }
+
+        .thumbnail {
+            display: block;
+            width: 100%;
+            height: 800px; /* Điều chỉnh chiều cao theo mong muốn */
+            object-fit: cover; /* Giúp hình ảnh lấp đầy khung mà không méo */
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        .info {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .genres {
+            font-style: italic;
+            color: #bbb;
+        }
+
+        .trailer-button {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 12px 20px;
+            background: #ff4500;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .trailer-button:hover {
+            background: #e63e00;
+        }
+
+        /* Modal */
+        .trailer-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .close {
+            color: red;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+        }
+
+        .comment-section {
+            margin-top: 30px;
+            padding: 15px;
+            background: #252525;
+            border-radius: 8px;
+        }
+
+        .comment-section h2 {
+            color: #ff4500;
+            text-transform: uppercase;
+        }
+
+        .comment-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comment-section li {
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        .comment-section em {
+            font-size: 12px;
+            color: #bbb;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #333;
+            color: white;
+            resize: none;
+        }
+
+        .back-button {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 12px;
+            background: #666;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 th:text="${movie.movieName}"></h1>
+    <img th:src="${movie.thumbnailURL}" alt="Movie Thumbnail" class="thumbnail">
+    <p class="info" th:text="${movie.description}"></p>
+    <p><strong>Release Year:</strong> <span th:text="${movie.releaseYear}"></span></p>
+    <p><strong>Rating:</strong> <span th:text="${movie.rating}"></span>/10</p>
+    <p><strong>Country:</strong> <span th:text="${movie.country.countryName}"></span></p>
+    <p class="genres"><strong>Genres:</strong>
+        <span th:each="genre : ${movieGenres}" th:text="${genre.genre.genreName} + ' ' "></span>
+    </p>
+
+    <!-- Nút xem phim -->
+    <form action="/movies/watch" method="get">
+        <input type="hidden" name="id" th:value="${movie.id}">
+        <button class="trailer-button" type="submit">View Movie</button>
+    </form>
+
+    <!-- Nút mở modal -->
+    <button class="trailer-button" onclick="showTrailer()">Watch Trailer</button>
+
+    <!-- Nút thêm vào danh sách yêu thích -->
+    <form action="/movies/addToFavorites" method="post">
+        <input type="hidden" name="movieId" th:value="${movie.id}">
+        <button class="trailer-button" type="submit">Add to Favorites</button>
+    </form>
+
+    <!-- Modal hiển thị trailer -->
+    <div id="trailer-modal" class="trailer-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTrailer()">&times;</span>
+            <iframe id="trailer-frame" src="" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Bình luận -->
+    <div class="comment-section">
+        <h2>Comments</h2>
+        <ul>
+            <li th:each="comment : ${comments}">
+                <strong th:text="${comment.fullName}"></strong>:
+                <span th:text="${comment.content}"></span>
+                <em th:text="${comment.createdAt}"></em>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Form thêm bình luận -->
+    <form action="/comments/add" method="post">
+        <input type="hidden" name="movieId" th:value="${movie.id}">
+        <textarea name="content" rows="3" required></textarea>
+        <button class="trailer-button" type="submit">Add Comment</button>
+    </form>
+
+    <a href="/movies/home" class="back-button">⬅ Back to Movies List</a>
+</div>
+
+<script>
+    function showTrailer() {
+        var rawURL = "[[${movie.trailerURL}]]";
+        var embedURL = convertToEmbedURL(rawURL);
+        document.getElementById("trailer-frame").src = embedURL;
+        document.getElementById("trailer-modal").style.display = "flex";
+    }
+
+    function closeTrailer() {
+        document.getElementById("trailer-modal").style.display = "none";
+        document.getElementById("trailer-frame").src = "";
+    }
+
+    function convertToEmbedURL(url) {
+        let videoID = url.split("v=")[1];
+        if (videoID) {
+            let ampersandPos = videoID.indexOf("&");
+            if (ampersandPos !== -1) {
+                videoID = videoID.substring(0, ampersandPos);
+            }
+            return "https://www.youtube.com/embed/" + videoID;
+        }
+        return url;
+    }
+</script>
+
+</body>
+</html>

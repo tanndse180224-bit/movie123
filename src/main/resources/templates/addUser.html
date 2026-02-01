@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New User</title>
+   
+</head>
+<body>
+
+<div class="container">
+    <h2>Add New User</h2>
+
+    <form action="/admin/addUser" method="post">
+        <label for="userName">Username:</label>
+        <input type="text" id="userName" name="userName" required>
+
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="role">Role:</label>
+        <select id="role" name="role">
+            <option value="1">Admin</option>
+            <option value="0">User</option>
+        </select>
+
+        <button type="submit">Add User</button>
+    </form>
+
+    <a href="/admin/users" class="btn">Back to User List</a>
+</div>
+
+</body>
+</html>
