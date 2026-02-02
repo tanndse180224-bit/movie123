@@ -57,6 +57,7 @@ public class UserService {
     }
 
 
+    @SuppressWarnings("null")
     public void save(User user) {
         userRepo.save(user);
     }

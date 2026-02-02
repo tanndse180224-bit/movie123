@@ -6,8 +6,6 @@ import hsf302.myMovie.models.User;
 import hsf302.myMovie.repo.FavoriteMovieRepo;
 import hsf302.myMovie.repo.MovieRepo;
 import hsf302.myMovie.repo.UserRepo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +14,6 @@ import java.util.Optional;
 
 @Service
 public class FavoriteMovieService {
-    private static final Logger logger = LoggerFactory.getLogger(FavoriteMovieService.class);
     @Autowired
     private FavoriteMovieRepo favoriteMovieRepo;
 

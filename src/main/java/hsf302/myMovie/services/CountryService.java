@@ -22,6 +22,7 @@ public class CountryService {
         return countryRepository.findById(id);
     }
 
+    @SuppressWarnings("null")
     public Country saveCountry(Country country) {
         return countryRepository.save(country);
     }

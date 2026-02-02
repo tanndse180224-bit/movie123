@@ -29,6 +29,7 @@ public class MovieService {
         return movieRepository.findById(id);
     }
 
+    @SuppressWarnings("null")
     public Movie saveMovie(Movie movie) {
         return movieRepository.save(movie);
     }

@@ -22,6 +22,7 @@ public class GenreService {
         return genreRepository.findById(id);
     }
 
+    @SuppressWarnings("null")
     public Genre saveGenre(Genre genre) {
         return genreRepository.save(genre);
     }

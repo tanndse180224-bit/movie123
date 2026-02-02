@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
-
 
 @Component
 public class DataInit implements CommandLineRunner {
@@ -19,15 +16,11 @@ public class DataInit implements CommandLineRunner {
     @Autowired
     private MovieRepo movieRepo ;
     @Autowired
-    private FavoriteMovieRepo favoriteMovieRepo ;
-    @Autowired
     private CountryRepo countryRepo;
     @Autowired
     private GenreRepo genreRepo ;
     @Autowired
     private MovieGenreRepo movieGenreRepo ;
-    @Autowired
-    private CommentRepo commentRepo;
 
 
     @Override

@@ -17,6 +17,7 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
+    @SuppressWarnings("null")
     public void addComment(Comment comment) {
         commentRepository.save(comment);
     }
