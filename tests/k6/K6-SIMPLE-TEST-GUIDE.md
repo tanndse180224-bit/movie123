@@ -17,6 +17,7 @@ netstat -an | findstr ":8080"
 # Nếu không có kết quả, khởi động ứng dụng:
 mvn spring-boot:run
 ```
+k6 run tests\k6\k6-simple-test.js
 
 ## 🔍 Giải thích chi tiết từng dòng code
 
